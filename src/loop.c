@@ -27,21 +27,24 @@ static void	do_transfer_2(int dst, int dst2, int src)
 {
 	char	buf[4096];
 	ssize_t	readed;
+	ssize_t osef;
 
 	if ((readed = read(src, buf, 4096)) <= 0)
 	{
 		ft_putstr_fd("read() failed", 2);
 		_exit(EXIT_FAILURE);
 	}
-	readed = write(dst, buf, readed);
-	readed = write(dst2, buf, readed);
+	osef = write(dst, buf, readed);
+	osef = write(dst2, buf, readed);
+	(void)osef;
 }
 
 void	loop(t_env *env)
 {
 	fd_set	sets[2];
+	int	status;
 
-	while (1)
+	while (!waitpid(env->pid, &status, WNOHANG))
 	{
 		init_sets(env, sets);
 		if (select(env->pty_mfd + 1, &sets[0], NULL, &sets[1], NULL) == -1)

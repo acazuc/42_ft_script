@@ -47,7 +47,7 @@ int		main(int ac, char **av, char **ev)
 		ft_putstr_fd("Failed to open pty\n", 2);
 		return (EXIT_FAILURE);
 	}
-	if (!do_the_fork(&env))
+	if (!(env.pid = do_the_fork(&env)))
 	{
 		ft_putstr_fd("Failed to fork\n", 2);
 		return (EXIT_FAILURE);

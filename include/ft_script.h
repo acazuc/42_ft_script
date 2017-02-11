@@ -13,8 +13,12 @@
 #ifndef FT_SCRIPT_H
 # define FT_SCRIPT_H
 
-#include "../libft/include/libft.h"
-#include <fcntl.h>
+# include "../libft/include/libft.h"
+# include <sys/ioctl.h>
+# include <sys/wait.h>
+# include <termios.h>
+# include <fcntl.h>
+# include <term.h>
 
 typedef struct s_env	t_env;
 
@@ -33,6 +37,7 @@ struct			s_env
 	int		file_fd;
 	int		pty_mfd;
 	int		pty_sfd;
+	pid_t		pid;
 };
 
 #endif
